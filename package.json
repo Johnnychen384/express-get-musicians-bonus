@@ -1,7 +1,7 @@
 {
   "name": "route-params",
   "version": "1.0.0",
-  "description": "",
+  "description": "![logo](https://user-images.githubusercontent.com/44912347/202296600-c5f247d6-9616-49db-88f0-38433429d781.jpg)",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -18,5 +18,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johnnychen384/express-get-musicians-bonus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Johnnychen384/express-get-musicians-bonus/issues"
+  },
+  "homepage": "https://github.com/Johnnychen384/express-get-musicians-bonus#readme"
 }

@@ -61,6 +61,22 @@ app.put('/musicians/:id', async (req, res) => {
 //TODO: Make a GET Request to the Band model. 
 // The Band Model has an association with many musicians
 // 1. Respond with the Bands including the Musicians in that band.
+app.get("/bands", async (req, res) => {
+	try{
+		const allBands = await Band.findAll({
+			include: Musician
+		})
+
+		if(allBands) {
+			res.status(200).json(allBands)
+		}
+	} catch(error) {
+		console.log(error)
+		res.status(400).send("Unsuccessful")
+	}
+
+	
+})
 
 
 //TODO: Make a GET Request to the Band Model at a particular ID
