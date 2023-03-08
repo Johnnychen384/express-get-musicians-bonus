@@ -82,6 +82,23 @@ app.get("/bands", async (req, res) => {
 //TODO: Make a GET Request to the Band Model at a particular ID
 // The Band Model has an association with many musicians 
 // 1. Respond with the paricular band including the musician in that particular band
+app.get("/bands/:id", async (req, res) => {
+	try{
+		const band = await Band.findByPk(req.params.id, {
+			include: Musician
+		})
+
+		if(band) {
+			res.status(200).json(band)
+		}
+		
+	} catch(error) {
+		console.log(error)
+		res.status(400).send("Unsuccessful")
+	}
+
+	
+})
 
 
 app.listen(port, async () => {
