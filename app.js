@@ -3,6 +3,11 @@ const app = express();
 
 const {Musician, Band} = require("./index");
 const {sequelize} = require('./db');
+const musicRouter = require("./router/Musicians")
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 
 const port = 8080;
 
@@ -24,39 +29,14 @@ async function seed(){
 	await bigBang.addMusician(Top);
 
 }
-
+app.use("/musicians", musicRouter)
 
 app.get('/', async (req, res) => {
 	res.send('<h1>Hello!</h1>')
 })
 
 
-app.get('/musicians', async (req, res) => {
-	let musicians = await Musician.findAll()
-	res.json({musicians})
-})
 
-app.get('/musicians/:id', async (req, res) => {
-	let musician = await Musician.findByPk(req.params.id)
-	res.json({musician})
-})
-
-app.delete('/musicians/:id', async (req, res) => {
-	await Musician.destroy({where: {id : req.params.id}})
-	res.send("deleted!!")
-})
-
-app.post('/musicians', async (req, res) => {
-	let newMusician = await Musician.create(req.body)
-	res.json(newMusician)
-})
-
-app.put('/musicians/:id', async (req, res) => {
-	let updated = await Musician.update(req.body, {
-		where: { id : req.params.id}
-	})
-	res.json({updated})
-})
 
 //TODO: Make a GET Request to the Band model. 
 // The Band Model has an association with many musicians
@@ -91,7 +71,7 @@ app.get("/bands/:id", async (req, res) => {
 		if(band) {
 			res.status(200).json(band)
 		}
-		
+
 	} catch(error) {
 		console.log(error)
 		res.status(400).send("Unsuccessful")
